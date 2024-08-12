@@ -144,25 +144,9 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
                 user_input[CONF_UPDATE_INTERVAL],
             )
         else:
-            geodata = await self.hass.async_add_executor_job(
-                client.getGeoData, self._lat, self._lon
-            )
-            guessed_postal_code = str(
-                geodata.get("address", {}).get(
-                    "postcode",
-                    "",
-                )
-            )
-            guessed_address = " ".join(
-                x.strip()
-                for x in str(geodata.get("display_name", "",)).split(
-                    ","
-                )[:3]
-            )
-
             schema = data_schema(
-                guessed_postal_code,
-                guessed_address,
+                "8590",
+                "Romanshorn",
                 DEFAULT_UPDATE_INTERVAL,
             )
 
